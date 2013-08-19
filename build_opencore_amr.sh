@@ -65,6 +65,8 @@ do
     else
         HOST="arm-apple-darwin"
     fi 
+    # a bit hack for malloc
+    export ac_cv_func_malloc_0_nonnull=yes
     ./configure --enable-cross-compile \
         $BUILD \
         $HOST \
