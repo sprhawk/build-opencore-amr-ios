@@ -10,6 +10,7 @@
 
 ROOT=`pwd`
 PREFIX="$ROOT/build"
+OUTPUTDIR="opencore-amr"
 
 if [ -d "$PREFIX" ]; then
     rm -rf "$PREFIX"
@@ -85,9 +86,8 @@ do
     fi
 done
 
-
 cd $ROOT
-mkdir -p $PREFIX/universal/{include,lib}
+mkdir -p $PREFIX/$OUTPUTDIR/{include,lib}
 
 for file in $PREFIX/$ARCHS/lib/*.a
 do
@@ -98,7 +98,8 @@ do
        files+=" $PREFIX/$ARCH/lib/$file " 
     done
     echo "Creating universal $file"
-    lipo $files -create -output "$PREFIX/universal/lib/$file"
+    lipo $files -create -output "$PREFIX/$OUTPUTDIR/lib/$file"
 done
 
-cp -r $PREFIX/$ARCHS/include/* $PREFIX/universal/include/
+cp -r $PREFIX/$ARCHS/include/* $PREFIX/$OUTPUTDIR/include/
+cp $ROOT/opencore-amr/LICENSE $PREFIX/$OUTPUTDIR/
