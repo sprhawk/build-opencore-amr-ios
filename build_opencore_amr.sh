@@ -24,7 +24,7 @@ MODULES_FLAGS="
 "
 
 cd opencore-amr
-if [ -x "configure" ]; then
+if [ ! -x "configure" ]; then
     autoreconf -i
 fi
 
